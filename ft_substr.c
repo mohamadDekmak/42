@@ -16,12 +16,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char			*result;
 	size_t			i;
 
-	if (s == NULL)
-		return (NULL);
-	if ((size_t)start >= ft_strlen(s))
+	if (s && (size_t)start >= ft_strlen(s))
 	{
 		result = (char *)malloc(sizeof(char));
-		if (result == NULL)
+		if (s == NULL || result == NULL)
 			return (NULL);
 		result[0] = '\0';
 		return (result);

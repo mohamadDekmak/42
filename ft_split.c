@@ -27,20 +27,13 @@ int	count_words(char const *s, char c)
 	return (word_count);
 }
 
-char	**ft_split(char const *s, char c)
+void	get_result(char const *s, char c, char **result, int *j)
 {
-	char	**result;
-	int		i;
-	int		j;
-	int		k;
+	int	i;
+	int	k;
 
-	if (s == NULL)
-		return (NULL);
-	result = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1));
-	if (result == NULL)
-		return (NULL);
 	i = 0;
-	j = 0;
+	*j = 0;
 	while (s[i])
 	{
 		if (s[i] != c)
@@ -48,18 +41,31 @@ char	**ft_split(char const *s, char c)
 			k = i;
 			while (s[k] && s[k] != c)
 				k++;
-			result[j] = (char *)malloc(sizeof(char) * (k - i + 1));
-			if (result[j] == NULL)
-				return (NULL);
+			result[*j] = (char *)malloc(sizeof(char) * (k - i + 1));
+			if (result[*j] == NULL)
+				return ;
 			k = 0;
 			while (s[i] && s[i] != c)
-				result[j][k++] = s[i++];
-			result[j][k] = '\0';
-			j++;
+				result[*j][k++] = s[i++];
+			result[*j][k] = '\0';
+			(*j)++;
 		}
 		else
 			i++;
 	}
-	result[j] = NULL;
+	result[*j] = NULL;
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**result;
+	int		j;
+
+	if (s == NULL)
+		return (NULL);
+	result = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1));
+	if (result == NULL)
+		return (NULL);
+	get_result(s, c, result, &j);
 	return (result);
 }
