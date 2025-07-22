@@ -1,26 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdekmak <mdekmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 09:48:57 by mdekmak           #+#    #+#             */
-/*   Updated: 2025/06/02 17:31:03 by mdekmak          ###   ########.fr       */
+/*   Created: 2025/05/19 21:08:37 by mdekmak           #+#    #+#             */
+/*   Updated: 2025/05/21 09:16:32 by mdekmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	void			*tmp;
+	char		*d;
+	const char	*s;
+	size_t		i;
 
-	if (size != 0 && nmemb > (18446744073709551615UL / size))
+	if (!dest || !src)
 		return (NULL);
-	tmp = malloc(nmemb * size);
-	if (!tmp)
-		return (NULL);
-	ft_memset(tmp, 0, nmemb * size);
-	return (tmp);
+	d = (char *)dest;
+	s = (const char *)src;
+	if (d == s || n == 0)
+		return (dest);
+	if (d > s)
+	{
+		while (n--)
+			d[n] = s[n];
+	}
+	else
+	{
+		i = 0;
+		while (i < n)
+		{
+			d[i] = s[i];
+			i++;
+		}
+	}
+	return (dest);
 }

@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdekmak <mdekmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 09:48:57 by mdekmak           #+#    #+#             */
-/*   Updated: 2025/06/02 17:31:03 by mdekmak          ###   ########.fr       */
+/*   Created: 2025/05/23 09:28:59 by mdekmak           #+#    #+#             */
+/*   Updated: 2025/05/23 09:31:00 by mdekmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	void			*tmp;
+	char			*result;
+	unsigned int	i;
 
-	if (size != 0 && nmemb > (18446744073709551615UL / size))
+	if (s == NULL || f == NULL)
 		return (NULL);
-	tmp = malloc(nmemb * size);
-	if (!tmp)
+	result = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (result == NULL)
 		return (NULL);
-	ft_memset(tmp, 0, nmemb * size);
-	return (tmp);
+	i = 0;
+	while (s[i])
+	{
+		result[i] = f(i, s[i]);
+		i++;
+	}
+	result[i] = '\0';
+	return (result);
 }

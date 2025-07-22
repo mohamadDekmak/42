@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdekmak <mdekmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 09:48:57 by mdekmak           #+#    #+#             */
-/*   Updated: 2025/06/02 17:31:03 by mdekmak          ###   ########.fr       */
+/*   Created: 2025/07/20 10:33:41 by mdekmak           #+#    #+#             */
+/*   Updated: 2025/07/20 10:33:41 by mdekmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "all.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+int main(int argc, char **argv)
 {
-	void			*tmp;
+	t_stack	*a;
+	t_stack	*b;
+	int		i = 0;
 
-	if (size != 0 && nmemb > (18446744073709551615UL / size))
-		return (NULL);
-	tmp = malloc(nmemb * size);
-	if (!tmp)
-		return (NULL);
-	ft_memset(tmp, 0, nmemb * size);
-	return (tmp);
+	if (argc >= 2)
+	{
+		a = get_data(argc, argv);
+		if (!a)
+			write(2, "Error\n", 6);
+		else if (is_dupp(a))
+		{
+			free_s(a);
+			write(2, "Error\n", 6);
+		}
+		else if (sorted(a))
+			free_s(a);
+	}
+	return (0);
 }
