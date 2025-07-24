@@ -39,11 +39,16 @@ t_node	*create_t_node(int data)
 
 void	add_node_to_s(t_stack	*s, t_node	*new)
 {
-	if (!new)
-		return;
+	t_node	*temp;
 
-	new->next = s->top;
-	s->top = new;
+	temp = s->top;
+	if (!s->top)
+		s->top  = new;
+	else{
+		while (temp->next)
+			temp = temp->next;
+		temp->next = new;
+	}
 }
 
 int	is_dupp(t_stack	*s)
@@ -77,7 +82,7 @@ int	sorted(t_stack *s)
 		temp1 = temp->next;
 		while (temp1)
 		{
-			if ((temp1->data > temp->data))
+			if ((temp1->data < temp->data))
 				return (0);
 			temp1 = temp1->next;
 		}

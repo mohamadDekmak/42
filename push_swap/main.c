@@ -30,6 +30,17 @@ int main(int argc, char **argv)
 		}
 		else if (sorted(a))
 			free_s(a);
+		else{
+			b = malloc(sizeof(t_stack));
+			b->top = NULL;
+			sort_stack(a, b);
+			// t_node * temp = a->top;
+			// while (temp)
+			// {
+			// 	printf("%d %d\n",temp->data, temp->index);
+			// 	temp = temp->next;
+			// }
+		}
 	}
 	return (0);
 }

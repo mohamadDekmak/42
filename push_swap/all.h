@@ -49,4 +49,6 @@ int		is_valid_n(char *str);
 void	add_node_to_s(t_stack	*s, t_node	*new);
 int		is_dupp(t_stack	*s);
 int		sorted(t_stack *s);
+int		get_size(t_stack * s);
+void	sort_stack(t_stack *a, t_stack *b);
 #endif
