@@ -4,7 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = ./libft
 
-SRCS = main.c process.c
+SRCS = main.c process.c helpers.c ft_split.c ft_split2.c
 
 OBJS = $(SRCS:.c=.o)
 
