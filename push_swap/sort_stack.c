@@ -12,12 +12,20 @@
 
 #include "all.h"
 
+void	sort_two(t_stack *a)
+{
+	if (a->top && a->top->next && a->top->data > a->top->next->data)
+		sa(a);
+}
+
 void	sort_three(t_stack *a)
 {
 	int	n1;
 	int	n2;
 	int	n3;
 
+	if (get_size(a) == 2)
+		return (sort_two(a));
 	n1 = (a->top)->data;
 	n2 = (a->top)->next->data;
 	n3 = (a->top)->next->next->data;
@@ -67,7 +75,6 @@ int	get_min_pos(t_stack *s)
 	pos = 0;
 	temp = s->top;
 	min = temp->data;
-	temp = temp->next;
 	while (temp)
 	{
 		if (min > temp->data)
@@ -80,41 +87,13 @@ int	get_min_pos(t_stack *s)
 	}
 	return (pos);
 }
-void	sort_five(t_stack *a, t_stack *b)
-{
-	int	min_pos;
 
-	while (get_size(a) > 3)
+void	help_sort_five(t_stack *s, int *min_pos)
+{
+	*min_pos = get_size(s) - (*min_pos + 1);
+	while (*min_pos > 0)
 	{
-		min_pos = get_min_pos(a);
-		if (min_pos <= get_size(a) / 2)
-		{
-			while (min_pos > 0)
-			{	
-				ra(a);
-				min_pos--;
-			}
-		}
-		else
-		{
-			min_pos = get_size(a) - min_pos;
-			while (min_pos > 0)
-			{	
-				rra(a);
-				min_pos--;
-			}
-		}
-		pb(b, a);
+		rra(s);
+		*min_pos = *min_pos - 1;
 	}
-	sort_three(a);
-	while (get_size(b) > 0)
-		pa(a, b);
-}
-
-void	sort_stack(t_stack *a, t_stack *b)
-{
-	if (get_size(a) <= 3)
-		sort_three(a);
-	else if (get_size(a) <= 5)
-		sort_five(a, b);
 }

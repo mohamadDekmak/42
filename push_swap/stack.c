@@ -16,12 +16,15 @@ void	free_s(t_stack	*s)
 {
 	t_node	*temp;
 
+	if (!s)
+		return ;
 	while (s->top)
 	{
 		temp = s->top;
 		s->top = s->top->next;
 		free(temp);
-	}	
+	}
+	free(s);
 }
 
 t_node	*create_t_node(int data)
@@ -43,8 +46,9 @@ void	add_node_to_s(t_stack	*s, t_node	*new)
 
 	temp = s->top;
 	if (!s->top)
-		s->top  = new;
-	else{
+		s->top = new;
+	else
+	{
 		while (temp->next)
 			temp = temp->next;
 		temp->next = new;
